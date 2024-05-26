@@ -27,15 +27,6 @@ if 'chat_session' not in st.session_state:
     st.session_state.chat_history = []
 
 
-# In[10]:
-
-
-# See if there's an ongoing chat session; if not, start a new one.
-#if 'chat_session' not in st.session_state:
- #   model = genai.GenerativeModel('gemini-1.5-pro')
- #   st.session_state.chat_session = model.start_chat()
- #   st.session_state.chat_history = []  
-
 def handle_chat(question):
     try:
          # add an introduction to our response to make it more welcoming for users.
@@ -116,7 +107,7 @@ To initiate a new session and clear all prior conversations, utilize the **"Rese
 
 
 # Main interaction area 
-user_input = st.text_input("Please type your dental-related questions here:", key="user_query")
+user_input = st.text_input("**Please type your dental-related questions here:**", key="user_query")
 if st.button("Ask Gigi"):
     if user_input:
         # See if the question already mentions specific words we're looking for.
