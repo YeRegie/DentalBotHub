@@ -14,28 +14,31 @@ import time
 
 
 # Load API key from environment variable
-API_KEY = os.getenv("GOOGLE_API_KEY")
-if not API_KEY:
-    # Displays an error on the Streamlit interface if the API key is not set.
-    st.error("Please set the GOOGLE_API_KEY environment variable with your Gemini API key.")
-    exit()
+api_key = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=os.getenv("API_KEY"))
+
+
+if 'chat_session' not in st.session_state:
+    model = genai.GenerativeModel('gemini-1.5-pro')  
+    st.session_state.chat_session = model.start_chat()
+    st.session_state.chat_history = []  
 
 
 # In[3]:
 
 
 # Configures the Gemini API with the obtained API key.
-genai.configure(api_key=API_KEY)
+#genai.configure(api_key=API_KEY)
 
 
 # In[4]:
 
 
 # See if there's an ongoing chat session; if not, start a new one.
-if 'chat_session' not in st.session_state:
-    model = genai.GenerativeModel('gemini-1.5-pro')
-    st.session_state.chat_session = model.start_chat()
-    st.session_state.chat_history = []  
+#if 'chat_session' not in st.session_state:
+   # model = genai.GenerativeModel('gemini-1.5-pro')
+   # st.session_state.chat_session = model.start_chat()
+   # st.session_state.chat_history = []  
 
 def handle_chat(question):
     try:
